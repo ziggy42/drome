@@ -3,8 +3,7 @@ package com.andreapivetta.drome;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by andrea on 5/13/17.
@@ -55,4 +54,9 @@ public class LRUCacheTest {
         assertEquals(0, emptyCache.size());
     }
 
+    @Test
+    public void containsKey() throws Exception {
+        assertTrue(fullCache.containsKey(MAX_SIZE));
+        assertFalse(fullCache.containsKey(MAX_SIZE * 2));
+    }
 }

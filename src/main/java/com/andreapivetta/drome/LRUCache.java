@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @author Andrea Pivetta
  * @see com.andreapivetta.drome.Cache
  */
-class LRUCache<K, V> implements Cache<K, V> {
+final class LRUCache<K, V> implements Cache<K, V> {
 
     class Node<T, U> {
         Node<T, U> previous;
@@ -94,6 +94,11 @@ class LRUCache<K, V> implements Cache<K, V> {
     @Override
     public int size() {
         return cache.size();
+    }
+
+    @Override
+    public boolean containsKey(K key) {
+        return cache.containsKey(key);
     }
 
     @Override

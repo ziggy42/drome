@@ -67,4 +67,13 @@ public interface Cache<K, V> {
      * @return the number of elements
      */
     int size();
+
+    /**
+     * Returns true if this cache contains a mapping for the specified key.
+     *
+     * @param key the key to test
+     * @return true if the cache contains a value for the specified key
+     */
+    boolean containsKey(K key);
+
 }
