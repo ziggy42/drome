@@ -58,17 +58,17 @@ class LRUCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key) {
-        Node<K, V> tempNode = cache.get(key);
-        if (tempNode == null)
+        Node<K, V> node = cache.get(key);
+        if (node == null)
             return null;
 
-        if (tempNode.key == mostRecentlyUsed.key)
+        if (node.key == mostRecentlyUsed.key)
             return mostRecentlyUsed.value;
 
-        Node<K, V> nextNode = tempNode.next;
-        Node<K, V> previousNode = tempNode.previous;
+        Node<K, V> nextNode = node.next;
+        Node<K, V> previousNode = node.previous;
 
-        if (tempNode.key == leastRecentlyUsed.key) {
+        if (node.key == leastRecentlyUsed.key) {
             nextNode.previous = null;
             leastRecentlyUsed = nextNode;
         } else {
@@ -76,12 +76,12 @@ class LRUCache<K, V> implements Cache<K, V> {
             nextNode.previous = previousNode;
         }
 
-        tempNode.previous = mostRecentlyUsed;
-        mostRecentlyUsed.next = tempNode;
-        mostRecentlyUsed = tempNode;
+        node.previous = mostRecentlyUsed;
+        mostRecentlyUsed.next = node;
+        mostRecentlyUsed = node;
         mostRecentlyUsed.next = null;
 
-        return tempNode.value;
+        return node.value;
     }
 
     @Override
@@ -99,6 +99,12 @@ class LRUCache<K, V> implements Cache<K, V> {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append("Max size: ")
+                .append(maxSize)
+                .append("\nCurrent Size: ")
+                .append(size())
+                .append("\n\n");
+
         for (K key : cache.keySet()) {
             builder.append(key)
                     .append(':')
@@ -106,6 +112,6 @@ class LRUCache<K, V> implements Cache<K, V> {
                     .append('\n');
         }
 
-        return "Max Size: " + maxSize + "\nCurrent Size: " + size() + "\n\n" + builder.toString();
+        return builder.toString().trim();
     }
 }

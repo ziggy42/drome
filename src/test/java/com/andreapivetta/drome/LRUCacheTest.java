@@ -46,6 +46,7 @@ public class LRUCacheTest {
     public void clear() throws Exception {
         fullCache.clear();
         assertEquals(0, fullCache.size());
+        assertNull(String.valueOf(1), fullCache.get(1));
     }
 
     @Test
