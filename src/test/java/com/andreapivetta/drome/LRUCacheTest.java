@@ -59,4 +59,19 @@ public class LRUCacheTest {
         assertTrue(fullCache.containsKey(MAX_SIZE));
         assertFalse(fullCache.containsKey(MAX_SIZE * 2));
     }
+
+    @Test
+    public void LRU() throws Exception {
+        LRUCache<Integer, String> cache = new LRUCache<>(3);
+
+        cache.put(1, "One");
+        cache.put(2, "Two");
+        cache.put(3, "Three");
+
+        cache.get(1);
+        cache.put(4, "Four");
+
+        assertNull(cache.get(2));
+        assertNotNull(cache.get(1));
+    }
 }
