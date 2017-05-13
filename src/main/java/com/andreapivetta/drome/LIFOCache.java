@@ -21,7 +21,7 @@ final class LIFOCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public void put(K key, V value) {
+    synchronized public void put(K key, V value) {
         if (cache.size() == maxSize)
             cache.remove(stack.pop());
 
@@ -30,29 +30,29 @@ final class LIFOCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public V get(K key) {
+    synchronized public V get(K key) {
         stack.push(key);
         return cache.get(key);
     }
 
     @Override
-    public void clear() {
+    synchronized public void clear() {
         stack.clear();
         cache.clear();
     }
 
     @Override
-    public int size() {
+    synchronized public int size() {
         return cache.size();
     }
 
     @Override
-    public boolean containsKey(K key) {
+    synchronized public boolean containsKey(K key) {
         return cache.containsKey(key);
     }
 
     @Override
-    public String toString() {
+    synchronized public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Max size: ")
                 .append(maxSize)

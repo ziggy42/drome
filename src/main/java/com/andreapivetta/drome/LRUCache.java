@@ -13,8 +13,8 @@ final class LRUCache<K, V> implements Cache<K, V> {
     private static class Node<T, U> {
         Node<T, U> previous;
         Node<T, U> next;
-        T key;
-        U value;
+        final T key;
+        final U value;
 
         Node(Node<T, U> previous, Node<T, U> next, T key, U value) {
             this.previous = previous;
@@ -37,7 +37,7 @@ final class LRUCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public void put(K key, V value) {
+    synchronized public void put(K key, V value) {
         if (cache.containsKey(key))
             return;
 
@@ -57,7 +57,7 @@ final class LRUCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public V get(K key) {
+    synchronized public V get(K key) {
         Node<K, V> node = cache.get(key);
         if (node == null)
             return null;
@@ -85,24 +85,24 @@ final class LRUCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public void clear() {
+    synchronized public void clear() {
         cache.clear();
         leastRecentlyUsed = null;
         mostRecentlyUsed = null;
     }
 
     @Override
-    public int size() {
+    synchronized public int size() {
         return cache.size();
     }
 
     @Override
-    public boolean containsKey(K key) {
+    synchronized public boolean containsKey(K key) {
         return cache.containsKey(key);
     }
 
     @Override
-    public String toString() {
+    synchronized public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Max size: ")
                 .append(maxSize)

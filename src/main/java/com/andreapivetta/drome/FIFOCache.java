@@ -25,32 +25,32 @@ final class FIFOCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public void put(K key, V value) {
+    synchronized public void put(K key, V value) {
         cache.put(key, value);
     }
 
     @Override
-    public V get(K key) {
+    synchronized public V get(K key) {
         return cache.get(key);
     }
 
     @Override
-    public void clear() {
+    synchronized public void clear() {
         cache.clear();
     }
 
     @Override
-    public int size() {
+    synchronized public int size() {
         return cache.size();
     }
 
     @Override
-    public boolean containsKey(K key) {
+    synchronized public boolean containsKey(K key) {
         return cache.containsKey(key);
     }
 
     @Override
-    public String toString() {
+    synchronized public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Max size: ")
                 .append(maxSize)
