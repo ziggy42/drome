@@ -113,7 +113,7 @@ final class LRUCache<K, V> implements Cache<K, V> {
         for (K key : cache.keySet()) {
             builder.append(key)
                     .append(':')
-                    .append(cache.get(key).value)
+                    .append(get(key))
                     .append('\n');
         }
 

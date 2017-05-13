@@ -1,41 +1,43 @@
 package com.andreapivetta.drome;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
- * Cache implementation that uses FIFO algorithm.
+ * Cache implementation that uses LIFO algorithm.
  *
  * @author Andrea Pivetta
  * @see com.andreapivetta.drome.Cache
  */
-final class FIFOCache<K, V> implements Cache<K, V> {
+final class LIFOCache<K, V> implements Cache<K, V> {
 
     private final int maxSize;
-    private final LinkedHashMap<K, V> cache;
+    private final Map<K, V> cache = new HashMap<>();
+    private final Stack<K> stack = new Stack<>();
 
-    FIFOCache(final int maxSize) {
+    LIFOCache(int maxSize) {
         this.maxSize = maxSize;
-        this.cache = new LinkedHashMap<K, V>() {
-            @Override
-            protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-                return size() > maxSize;
-            }
-        };
     }
 
     @Override
     public void put(K key, V value) {
+        if (cache.size() == maxSize)
+            cache.remove(stack.pop());
+
         cache.put(key, value);
+        stack.push(key);
     }
 
     @Override
     public V get(K key) {
+        stack.push(key);
         return cache.get(key);
     }
 
     @Override
     public void clear() {
+        stack.clear();
         cache.clear();
     }
 

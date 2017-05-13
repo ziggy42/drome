@@ -6,13 +6,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by andrea on 5/13/17.
+ * Created by andrea on 5/14/17.
  */
-public class FIFOCacheTest {
+public class LIFOCacheTest {
 
     private static final int MAX_SIZE = 300;
-    private final FIFOCache<Integer, String> fullCache = new FIFOCache<>(MAX_SIZE);
-    private final FIFOCache<Integer, String> emptyCache = new FIFOCache<>(MAX_SIZE);
+    private final LIFOCache<Integer, String> fullCache = new LIFOCache<>(MAX_SIZE);
+    private final LIFOCache<Integer, String> emptyCache = new LIFOCache<>(MAX_SIZE);
 
     @Before
     public void setUp() throws Exception {
@@ -61,15 +61,15 @@ public class FIFOCacheTest {
     }
 
     @Test
-    public void FIFO() throws Exception {
-        FIFOCache<Integer, String> cache = new FIFOCache<>(3);
+    public void LIFO() throws Exception {
+        LIFOCache<Integer, String> cache = new LIFOCache<>(3);
 
         cache.put(1, "One");
         cache.put(2, "Two");
         cache.put(3, "Three");
         cache.put(4, "Four");
 
-        assertNull(cache.get(1));
-        assertNotNull(cache.get(2));
+        assertNotNull(cache.get(1));
+        assertNull(cache.get(3));
     }
 }
