@@ -4,7 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by andrea on 5/13/17.
+ * Cache implementation that uses FIFO algorithm.
+ *
+ * @author Andrea Pivetta
+ * @see com.andreapivetta.drome.Cache
  */
 final class FIFOCache<K, V> implements Cache<K, V> {
 

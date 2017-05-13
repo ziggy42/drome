@@ -3,7 +3,7 @@ package com.andreapivetta.drome;
 import java.util.HashMap;
 
 /**
- * Cache implementation that use LRU algorithm.
+ * Cache implementation that uses LRU algorithm.
  *
  * @author Andrea Pivetta
  * @see com.andreapivetta.drome.Cache
