@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 final class LRUCache<K, V> implements Cache<K, V> {
 
-    class Node<T, U> {
+    private static class Node<T, U> {
         Node<T, U> previous;
         Node<T, U> next;
         T key;
