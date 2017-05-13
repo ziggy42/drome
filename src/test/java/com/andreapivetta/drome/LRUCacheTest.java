@@ -37,6 +37,8 @@ public class LRUCacheTest {
     @Test
     public void get() throws Exception {
         assertEquals(String.valueOf(1), fullCache.get(1));
+        assertEquals(String.valueOf(MAX_SIZE / 2), fullCache.get(MAX_SIZE / 2));
+        assertEquals(String.valueOf(MAX_SIZE), fullCache.get(MAX_SIZE));
         assertNull(fullCache.get(MAX_SIZE + 1));
     }
 
