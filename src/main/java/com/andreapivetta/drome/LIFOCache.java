@@ -31,7 +31,6 @@ final class LIFOCache<K, V> implements Cache<K, V> {
 
     @Override
     synchronized public V get(K key) {
-        stack.push(key);
         return cache.get(key);
     }
 
